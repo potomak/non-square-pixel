@@ -41,8 +41,17 @@ images.each do |image|
     progress.inc(cols)
   end
 
-  Image.constitute(cols*3, rows*3, "RGB", pixels).write("images/non_square_#{File.basename(image.filename)}.png")
-  progress.inc(image_average_weight)
+  # constitute image from pixels array
+  new_image = Image.constitute(cols*3, rows*3, "RGB", pixels)
+  progress.inc(image_average_weight/3)
+
+  # more brightness
+  new_image = new_image.modulate(1.5)
+  progress.inc(image_average_weight/3)
+
+  # write image file
+  new_image.write("images/non_square_#{File.basename(image.filename)}.png")
+  progress.inc(image_average_weight/3)
 end
 
 progress.finish
