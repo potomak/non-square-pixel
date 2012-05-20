@@ -8,9 +8,11 @@ include Magick
 
 puts "non square pixel"
 
-images = ImageList.new('images/test_1.jpg', 'images/test_2.png')
+images = ImageList.new(*Dir['images/[^non_square]*.{png,jpg}'])
+
 image_average_weight = images.to_a.reduce(0) {|s, i| s + (i.columns * i.rows)/images.size}
 puts "image_average_weight: #{image_average_weight}"
+
 progress = ProgressBar.new("working", images.to_a.reduce(0) {|s, i| s + (i.columns * i.rows)} + (images.size*image_average_weight))
 progress.bar_mark = '#'
 
