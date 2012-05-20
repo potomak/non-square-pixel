@@ -17,7 +17,7 @@ images.each do |image|
   rows.times do |i|
     3.times do |n|
       cols.times do |j|
-        pixel = image.pixel_color(i, cols - (j+1))
+        pixel = image.pixel_color(j, i)
 
         pixels << pixel.red
         pixels << 0
